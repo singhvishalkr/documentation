@@ -7225,7 +7225,7 @@ File path: N/A
       "Article": {
         "type": "object",
         "properties": {
-          "id": { "type": "integer" },
+          "id": { "type": "string" },
           "title": { "type": "string" },
           "content": { "type": "string" }
         }
@@ -17299,7 +17299,7 @@ File path: /config/features.ts
 ```ts
   module.exports = ({ env }) => ({
     future: {
-      experimental_firstPublishedAt: env.bool('STRAPI_FUTURE_EXPERIMENTAL_FIRST_PUBLISHED_AT', false),
+      adminTokens: env.bool('STRAPI_FUTURE_ADMIN_TOKENS', false),
     },
   })
 ```
@@ -17309,7 +17309,7 @@ Language: DOTENV
 File path: .env
 
 ```dotenv
-  STRAPI_FUTURE_EXPERIMENTAL_FIRST_PUBLISHED_AT=true
+  STRAPI_FUTURE_ADMIN_TOKENS=true
 ```
 
 ---
@@ -17319,7 +17319,7 @@ File path: /config/features.ts
 ```ts
   export default {
     future: {
-      experimental_firstPublishedAt: env.bool('STRAPI_FUTURE_EXPERIMENTAL_FIRST_PUBLISHED_AT', false),
+      adminTokens: env.bool('STRAPI_FUTURE_ADMIN_TOKENS', false),
     },
   };
 ```
@@ -17329,7 +17329,7 @@ Language: DOTENV
 File path: .env
 
 ```dotenv
-  STRAPI_FUTURE_EXPERIMENTAL_FIRST_PUBLISHED_AT=true
+  STRAPI_FUTURE_ADMIN_TOKENS=true
 ```
 
 Language: Bash
@@ -23219,6 +23219,10 @@ module.exports = ({ env })=>({
         small: 500,
         xsmall: 64
       },
+      sharp: {
+        cache: true,
+        concurrency: 4,
+      },
       security: {
         allowedTypes: ['image/*', 'application/*'],
         deniedTypes: ['application/x-sh', 'application/x-dosexec']
@@ -23248,6 +23252,10 @@ export default () => ({
         medium: 750,
         small: 500,
         xsmall: 64
+      },
+      sharp: {
+        cache: true,
+        concurrency: 4,
       },
       security: {
         allowedTypes: ['image/*', 'application/*'],
@@ -23489,6 +23497,44 @@ export default ({ env }) => ({
         medium: 750,
         small: 500,
         xsmall: 64
+      },
+    },
+  },
+});
+```
+
+
+## Sharp configuration
+Description: The default values (cache: false, concurrency: 1) are optimized for low memory usage.
+(Source: https://docs.strapi.io/cms/features/media-library#sharp-configuration)
+
+Language: JavaScript
+File path: /config/plugins.js
+
+```js
+module.exports = ({ env }) => ({
+  upload: {
+    config: {
+      sharp: {
+        cache: true,
+        concurrency: 4,
+      },
+    },
+  },
+});
+```
+
+---
+Language: TypeScript
+File path: /config/plugins.ts
+
+```ts
+export default ({ env }) => ({
+  upload: {
+    config: {
+      sharp: {
+        cache: true,
+        concurrency: 4,
       },
     },
   },
@@ -32740,7 +32786,7 @@ Description: To install the documentation plugin, run following command in your 
 (Source: https://docs.strapi.io/cms/plugins/documentation#installation)
 
 Language: Bash
-File path: />`<server-url>:<server-port>/documentation/<version>/openapi.js
+File path: `src/extensions/documentation/documentation/<version>/full_documentation.json`
 
 ```bash
 yarn add @strapi/plugin-documentation
@@ -32748,7 +32794,7 @@ yarn add @strapi/plugin-documentation
 
 ---
 Language: Bash
-File path: />`<server-url>:<server-port>/documentation/<version>/openapi.js
+File path: `src/extensions/documentation/documentation/<version>/full_documentation.json`
 
 ```bash
 npm install @strapi/plugin-documentation
