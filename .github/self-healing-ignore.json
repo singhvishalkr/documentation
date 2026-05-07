@@ -99,6 +99,21 @@
       "number": 26211,
       "reason": "Triage: internal refactoring — no behavior change expected",
       "added": "2026-05-06"
+    },
+    {
+      "number": 26212,
+      "reason": "Triage: test infrastructure/flakiness fix",
+      "added": "2026-05-07"
+    },
+    {
+      "number": 26179,
+      "reason": "Router: Internal Document Service API bug fix for x-to-one relation handling with Draft & Publish. Fixes an internal behavior issue where draft and published entries weren't being linked correctly. No public API changes or user-facing behavior changes; users should not need to change their code.",
+      "added": "2026-05-07"
+    },
+    {
+      "number": 26010,
+      "reason": "Router: UI/CSS fix in Content Manager's Dynamic Zone component picker. Addresses a visual overflow issue where long component names without spaces would bleed into adjacent cards. This is a visual/UX improvement with no impact on documented behavior, features, or APIs.",
+      "added": "2026-05-07"
     }
   ]
 }
