@@ -80,6 +80,10 @@ The `connection.connection` object found in `./config/database.js` (or `./config
 Depending on the database client used, more parameters can be set (e.g., `charset` and `collation` for <ExternalLink to="https://github.com/mysqljs/mysql#connection-options" text="mysql"/>). Check the database client documentation to know what parameters are available, for instance the <ExternalLink to="https://node-postgres.com/apis/client#new-client" text="pg"/>, <ExternalLink to="https://github.com/mysqljs/mysql#connection-options" text="mysql"/>, and <ExternalLink to="https://github.com/WiseLibs/better-sqlite3/blob/master/docs/api.md#new-databasepath-options" text="better-sqlite3"/> documentations.
 :::
 
+:::tip
+The `connection` object is passed to Knex. If Knex supports additional options that are not listed on this page (for example `expirationChecker` for short-lived credentials), you can add them here.
+:::
+
 #### Database pooling options
 
 The `connection.pool` object optionally found in `./config/database.js` (or `./config/database.ts` for TypeScript) is used to pass <ExternalLink to="https://github.com/vincit/tarn.js" text="Tarn.js"/> database pooling options and accepts the following parameters:
@@ -247,6 +251,47 @@ export default ({ env }) => ({
 
 </TabItem>
 </Tabs>
+
+### Example: PostgreSQL with AWS RDS IAM authentication (dynamic password token)
+
+Knex supports short-lived credentials by letting you provide `connection.connection` as a function and by checking whether a token needs renewal via `expirationChecker`.
+
+```ts title="./config/database.ts"
+import { Signer } from '@aws-sdk/rds-signer';
+
+export default ({ env }) => {
+  const signer = new Signer({
+    hostname: env('DATABASE_HOST', 'localhost'),
+    port: env.int('DATABASE_PORT', 5432),
+    username: env('DATABASE_USERNAME', 'strapi'),
+  });
+
+  return {
+    connection: {
+      client: 'postgres',
+      connection: async () => {
+        const token = await signer.getAuthToken();
+        const expiresAt = Date.now() + 15 * 60 * 1000;
+
+        return {
+          host: env('DATABASE_HOST', 'localhost'),
+          port: env.int('DATABASE_PORT', 5432),
+          database: env('DATABASE_NAME', 'strapi'),
+          user: env('DATABASE_USERNAME', 'strapi'),
+          password: token,
+          schema: env('DATABASE_SCHEMA', 'public'),
+          ssl: true,
+          expirationChecker: () => expiresAt - Date.now() <= 5 * 60 * 1000,
+        };
+      },
+    },
+  };
+};
+```
+
+:::note
+AWS RDS IAM authentication requires SSL. Refer to the AWS documentation for the required certificate bundle and SSL parameters.
+:::
 
 ## Configuration in database
 
