@@ -114,6 +114,21 @@
       "number": 26010,
       "reason": "Router: UI/CSS fix in Content Manager's Dynamic Zone component picker. Addresses a visual overflow issue where long component names without spaces would bleed into adjacent cards. This is a visual/UX improvement with no impact on documented behavior, features, or APIs.",
       "added": "2026-05-07"
+    },
+    {
+      "number": 25660,
+      "reason": "Router: Internal admin UI bug fix for Prism.js library loading issue in Code block component. No public API or user-facing behavior change.",
+      "added": "2026-05-08"
+    },
+    {
+      "number": 26120,
+      "reason": "Router: Database query helper bug fix for morph relation population. Internal correctness fix ensuring morphTo relations return correct type discriminator; not a new feature or breaking change requiring user documentation.",
+      "added": "2026-05-08"
+    },
+    {
+      "number": 26240,
+      "reason": "Router: Admin UI bug fix for filter persistence in Content Manager. Fixes stale localStorage data after clearing filters. Internal UX improvement with no public API change.",
+      "added": "2026-05-08"
     }
   ]
 }
