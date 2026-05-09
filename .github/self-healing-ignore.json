@@ -129,6 +129,21 @@
       "number": 26240,
       "reason": "Router: Admin UI bug fix for filter persistence in Content Manager. Fixes stale localStorage data after clearing filters. Internal UX improvement with no public API change.",
       "added": "2026-05-08"
+    },
+    {
+      "number": 26202,
+      "reason": "Triage: internal schema hashing optimization",
+      "added": "2026-05-09"
+    },
+    {
+      "number": 25894,
+      "reason": "Router: Internal bug fix in query parameter validation. Throws correct HTTP status code (400 Bad Request instead of 500) for invalid user input — no public API surface change. Error messages remain unchanged and user-facing behavior is already documented.",
+      "added": "2026-05-09"
+    },
+    {
+      "number": 25416,
+      "reason": "Router: Bug fix in admin fetch client's response handling (Safari error on 204 No Content). No public API or user-facing behavior change — entirely internal to admin UI error handling.",
+      "added": "2026-05-09"
     }
   ]
 }
