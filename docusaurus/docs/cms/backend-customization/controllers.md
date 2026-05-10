@@ -230,6 +230,19 @@ To see a possible advanced usage for custom controllers, read the [services and 
 - Adding a route should only be done for new actions or paths. If you introduce a brand-new method such as `exampleAction`, create or update a route entry whose `handler` points to the action so HTTP requests can reach it. Use the fully-qualified handler syntax `<scope>::<api-or-plugin-name>.<controllerName>.<actionName>` (e.g. `api::restaurant.restaurant.exampleAction` for an API controller or `plugin::menus.menu.exampleAction` for a plugin controller).
 - Regarding controller and route filenames: the default controller name comes from the filename inside `./src/api/[api-name]/controllers/`. Core routers created with `createCoreRouter` adopt the same name, so the generated handler string matches automatically. Custom routers can follow any file naming scheme, as long as the `handler` string references an exported controller action.
 
+:::tip How to read the mapping
+
+| HTTP | Example Content API route | Typical handler string | Controller export |
+| --- | --- | --- | --- |
+| `GET` | `/api/restaurants` | `api::restaurant.restaurant.find` | `find` |
+| `GET` | `/api/restaurants/:documentId` | `api::restaurant.restaurant.findOne` | `findOne` |
+| `POST` | `/api/restaurants` | `api::restaurant.restaurant.create` | `create` |
+| `PUT` | `/api/restaurants/:documentId` | `api::restaurant.restaurant.update` | `update` |
+| `DELETE` | `/api/restaurants/:documentId` | `api::restaurant.restaurant.delete` | `delete` |
+
+Swap `restaurant` for your API id and controller file name. Use `yarn strapi routes:list` (or `npm run strapi routes:list`) to print the exact handler strings your app registered.
+:::
+
 The example below adds a new controller action and exposes it through a custom route without duplicating the existing CRUD route definitions:
 
 ```js title="./src/api/restaurant/controllers/restaurant.js"
