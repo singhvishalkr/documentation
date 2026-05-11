@@ -30,7 +30,7 @@ There are 2 use cases where you might want to extend the admin panel:
 <HotReloading />
 
 :::note
-This section is about the **admin panel** bundle under `/src/admin`. If you need to change **server** behaviour for a core plugin (for example upload APIs used while browsing `/admin/plugins/upload`), use `./src/extensions/<plugin-name>/strapi-server.js|ts` as described in [Plugins extension](/cms/plugins-development/plugins-extension).
+This section is about the admin panel bundle under `/src/admin`. To change server behaviour for a core plugin (for example upload APIs used while browsing `/admin/plugins/upload`), use `./src/extensions/<plugin-name>/strapi-server.js|ts` as described in [Plugins extension](/cms/plugins-development/plugins-extension).
 :::
 
 ## When to consider a plugin instead
