@@ -5036,7 +5036,7 @@ strapi.entityService.update('api::article.article', 1, {
 Source: https://docs.strapi.io/cms/api/entity-service/crud
 
 ## Example
-Description: | Parameter | Description | Type | | ---------- | --------------- | --------------- | | fields | Attributes to return | String[] | | populate | Relations, components and dynamic zones to populate | PopulateParameter |
+Description: | Parameter | Description | Type | | ---------- | --------------- | --------------- | | fields | Attributes to return | String[] | | populate | Relations, components and dynamic zones to populate | PopulateParameter | | locale | Locale code (for example fr-FR) when the Internationalization plugin is enabled.
 (Source: https://docs.strapi.io/cms/api/entity-service/crud#example)
 
 Language: JavaScript
@@ -5088,6 +5088,7 @@ Syntax: `create(uid: string, parameters: Params)` ⇒ `Entry`
 | ---------- | ----------- | ---------- |
 | `fields`   | Attributes to return | `String[]`  |
 | `populate` | Relations, components and dynamic zones to [populate](/cms/api/entity-service/populate) | [`PopulateParameter`](/cms/api/entity-service/populate) |
+| `locale` | Locale code when the Internationalization plugin is enabled. Creates the entry for that locale. | `string` |
 | `data`     | Input data  | `Object` |
 
 <ManagingRelations components={props.components} />
@@ -5118,6 +5119,7 @@ Syntax: `update(uid: string, id: ID, parameters: Params)` ⇒ `Entry`
 | ---------- | ------------- | ---------- |
 | `fields`   | Attributes to return | `String[]`  |
 | `populate` | Relations, components and dynamic zones to [populate](/cms/api/entity-service/populate) | [`PopulateParameter`](/cms/api/entity-service/populate) |
+| `locale` | Locale code when the Internationalization plugin is enabled. Updates the matching localized variant. | `string` |
 | `data`     | Input data  | `object`  |
 
 ### Example
@@ -5140,6 +5142,7 @@ Syntax: `delete(uid: string, id: ID, parameters: Params)` ⇒ `Entry`
 | ---------- | --------- | -------- |
 | `fields`   | Attributes to return | `String[]`  |
 | `populate` | Relations, components and dynamic zones to [populate](/cms/api/entity-service/populate) | [`PopulateParameter`](/cms/api/entity-service/populate) |
+| `locale` | Locale code when the Internationalization plugin is enabled. Deletes the localized variant that matches this locale. | `string` |
 
 ### Example
 ```
