@@ -176,6 +176,47 @@ module.exports = ({ env }) => ({
 });
 ```
 
+**Example: PostgreSQL with AWS RDS IAM authentication (dynamic password token)**
+
+Knex supports short-lived credentials by letting you provide `connection.connection` as a function and by checking whether a token needs renewal via `expirationChecker`.
+
+```ts title="./config/database.ts"
+import { Signer } from '@aws-sdk/rds-signer';
+
+export default ({ env }) => {
+  const signer = new Signer({
+    hostname: env('DATABASE_HOST', 'localhost'),
+    port: env.int('DATABASE_PORT', 5432),
+    username: env('DATABASE_USERNAME', 'strapi'),
+  });
+
+  return {
+    connection: {
+      client: 'postgres',
+      connection: async () => {
+        const token = await signer.getAuthToken();
+        const expiresAt = Date.now() + 15 * 60 * 1000;
+
+        return {
+          host: env('DATABASE_HOST', 'localhost'),
+          port: env.int('DATABASE_PORT', 5432),
+          database: env('DATABASE_NAME', 'strapi'),
+          user: env('DATABASE_USERNAME', 'strapi'),
+          password: token,
+          schema: env('DATABASE_SCHEMA', 'public'),
+          ssl: true,
+          expirationChecker: () => expiresAt - Date.now() <= 5 * 60 * 1000,
+        };
+      },
+    },
+  };
+};
+```
+
+:::note
+AWS RDS IAM authentication requires SSL. Refer to the AWS documentation for the required certificate bundle and SSL parameters.
+:::
+
 </TabItem>
 
  <TabItem value="MySQL/MariaDB" label="MySQL/MariaDB">
@@ -221,7 +262,7 @@ module.exports = ({ env }) => ({
 ```
 
 :::tip
-Strapi’s default SQLite database lives at `.tmp/data.db` at the root of the project. If you want to customise the path to store the database elsewhere, set the `DATABASE_FILENAME` environment variable.
+Strapiâ€™s default SQLite database lives at `.tmp/data.db` at the root of the project. If you want to customise the path to store the database elsewhere, set the `DATABASE_FILENAME` environment variable.
 :::
 
 </TabItem>
@@ -251,47 +292,6 @@ export default ({ env }) => ({
 
 </TabItem>
 </Tabs>
-
-### Example: PostgreSQL with AWS RDS IAM authentication (dynamic password token)
-
-Knex supports short-lived credentials by letting you provide `connection.connection` as a function and by checking whether a token needs renewal via `expirationChecker`.
-
-```ts title="./config/database.ts"
-import { Signer } from '@aws-sdk/rds-signer';
-
-export default ({ env }) => {
-  const signer = new Signer({
-    hostname: env('DATABASE_HOST', 'localhost'),
-    port: env.int('DATABASE_PORT', 5432),
-    username: env('DATABASE_USERNAME', 'strapi'),
-  });
-
-  return {
-    connection: {
-      client: 'postgres',
-      connection: async () => {
-        const token = await signer.getAuthToken();
-        const expiresAt = Date.now() + 15 * 60 * 1000;
-
-        return {
-          host: env('DATABASE_HOST', 'localhost'),
-          port: env.int('DATABASE_PORT', 5432),
-          database: env('DATABASE_NAME', 'strapi'),
-          user: env('DATABASE_USERNAME', 'strapi'),
-          password: token,
-          schema: env('DATABASE_SCHEMA', 'public'),
-          ssl: true,
-          expirationChecker: () => expiresAt - Date.now() <= 5 * 60 * 1000,
-        };
-      },
-    },
-  };
-};
-```
-
-:::note
-AWS RDS IAM authentication requires SSL. Refer to the AWS documentation for the required certificate bundle and SSL parameters.
-:::
 
 ## Configuration in database
 
