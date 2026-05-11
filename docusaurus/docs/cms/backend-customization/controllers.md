@@ -231,7 +231,7 @@ To see a possible advanced usage for custom controllers, read the [services and 
 - Regarding controller and route filenames: the default controller name comes from the filename inside `./src/api/[api-name]/controllers/`. Core routers created with `createCoreRouter` adopt the same name, so the generated handler string matches automatically. Custom routers can follow any file naming scheme, as long as the `handler` string references an exported controller action.
 
 :::note About core mapping
-The REST routes Strapi generates for a content-type point each HTTP method at a **handler** string (for example `api::restaurant.restaurant.find`). That string already identifies the controller file and the exported action name (`find`, `findOne`, `create`, `update`, or `delete`). When you change the implementation inside those exports but keep the names, the router still calls your code. Edit the route file only when you add a new action name or path outside that default CRUD set.
+The REST routes Strapi generates for a content-type point each HTTP method at a handler string (for example `api::restaurant.restaurant.find`). That string already identifies the controller file and the exported action name (`find`, `findOne`, `create`, `update`, or `delete`). When you change the implementation inside those exports but keep the names, the router still calls your code. Edit the route file only when you add a new action name or path outside that default CRUD set.
 :::
 
 The example below adds a new controller action and exposes it through a custom route without duplicating the existing CRUD route definitions:
