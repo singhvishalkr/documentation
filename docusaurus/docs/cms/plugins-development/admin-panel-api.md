@@ -227,7 +227,7 @@ Use the following table to find which function to use and where to declare it. C
 | Register a hook                          | [`registerHook()`](/cms/plugins-development/admin-hooks)                    | [`bootstrap()`](#bootstrap)   |
 | Provide translations for the plugin admin interface | [`registerTrads()`](/cms/plugins-development/admin-localization#registertrads) | `registerTrads()` |
 | Make authenticated HTTP requests | [`useFetchClient()`](/cms/plugins-development/admin-fetch-client) / [`getFetchClient()`](/cms/plugins-development/admin-fetch-client#outside-a-react-component) | Any |
-| Access Content Manager Edit View context from React | [`unstable_useContentManagerContext`](#accessing-data-with-the-usecmeditviewdatamanager-react-hook) | Any |
+| Access Content Manager Edit View context from React | [`unstable_useContentManagerContext`](/cms/migration/v4-to-v5/additional-resources/helper-plugin#usecmeditviewdatamanager) | Any |
 
 <br/>
 Click on any of the following cards to get more details about a specific topic:
@@ -241,72 +241,6 @@ Click on any of the following cards to get more details about a specific topic:
 <CustomDocCard icon="globe" title="Localization" description="Provide translations for your plugin's admin interface using registerTrads and react-intl." link="/cms/plugins-development/admin-localization" />
 <CustomDocCard icon="cloud-arrow-down" title="Fetch client" description="Make authenticated HTTP requests from the admin panel using useFetchClient and getFetchClient." link="/cms/plugins-development/admin-fetch-client" />
 </CustomDocCardsWrapper>
-
-## Accessing Content Manager Edit View data {#accessing-data-with-the-usecmeditviewdatamanager-react-hook}
-
-Plugins that render inside the Content Manager Edit View sometimes need the same context Strapi uses for built-in fields (slug, draft and publish flags, the record id). Strapi 5 removed `@strapi/helper-plugin`, so `useCMEditViewDataManager` is not available.
-
-Import `unstable_useContentManagerContext` from `@strapi/strapi/admin` and alias it locally. The `unstable_` prefix means the hook may change while plugin APIs finish stabilizing.
-
-:::note
-This hook only works inside the Content Manager Edit View React tree (including components injected through [injection zones](/cms/plugins-development/admin-injection-zones)). For every field that existed on the old helper-plugin hook, see the migration reference for [`useCMEditViewDataManager`](/cms/migration/v4-to-v5/additional-resources/helper-plugin#usecmeditviewdatamanager).
-:::
-
-<Tabs groupId="js-ts">
-<TabItem value="js" label="JavaScript" default>
-
-```jsx title="plugins/my-plugin/admin/src/components/Preview.jsx"
-import { unstable_useContentManagerContext as useContentManagerContext } from '@strapi/strapi/admin';
-
-export const Preview = () => {
-  const {
-    model,
-    collectionType,
-    id,
-    slug,
-    isCreatingEntry,
-    isSingleType,
-    hasDraftAndPublish,
-  } = useContentManagerContext();
-
-  return (
-    <section>
-      Editing <code>{slug}</code>
-      {isSingleType ? ' (single type)' : ' (collection type)'}
-    </section>
-  );
-};
-```
-
-</TabItem>
-<TabItem value="ts" label="TypeScript">
-
-```tsx title="plugins/my-plugin/admin/src/components/Preview.tsx"
-import { unstable_useContentManagerContext as useContentManagerContext } from '@strapi/strapi/admin';
-
-export const Preview = () => {
-  const {
-    model,
-    collectionType,
-    id,
-    slug,
-    isCreatingEntry,
-    isSingleType,
-    hasDraftAndPublish,
-  } = useContentManagerContext();
-
-  return (
-    <section>
-      Editing <code>{slug}</code>
-      {isSingleType ? ' (single type)' : ' (collection type)'}
-    </section>
-  );
-};
-```
-
-</TabItem>
-</Tabs>
-
 
 :::tip Replacing the WYSIWYG
 The WYSIWYG editor can be replaced by taking advantage of [custom fields](/cms/features/custom-fields), for instance using the <ExternalLink to="https://market.strapi.io/plugins/@ckeditor-strapi-plugin-ckeditor" text="CKEditor custom field plugin"/>.
