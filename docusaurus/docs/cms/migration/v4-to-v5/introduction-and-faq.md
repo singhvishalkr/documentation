@@ -18,10 +18,10 @@ Whenever you feel ready to upgrade to Strapi 5, the present page will help you. 
 
 All of the following available resources will help you upgrade your application and plugins to Strapi 5, from the most common to the most specific use cases:
 
-<CustomDocCard emoji="1️⃣" title="Step-by-step guide" description="Read this guide first to get an overview of the upgrade process." link="/cms/migration/v4-to-v5/step-by-step" />
-<CustomDocCard emoji="2️⃣" title="Upgrade tool reference" description="Learn more about how the upgrade tool can automatically migrate some parts of your Strapi v4 application to Strapi 5." link="/cms/upgrade-tool" />
-<CustomDocCard emoji="3️⃣" title="Breaking changes list" description="Read more about the differences between Strapi v4 and v5, the resulting breaking changes, and how to handle them manually or with the help of the codemods provided with the upgrade tool." link="/cms/migration/v4-to-v5/breaking-changes" />
-<CustomDocCard emoji="4️⃣" title="Specific resources" description="Handle specific use cases such as the deprecation of the Entity Service API in favor of the new Document Service API, the plugins migration, and the deprecation of the helper-plugin." link="/cms/migration/v4-to-v5/additional-resources/introduction" />
+<CustomDocCard emoji="1ï¸âƒ£" title="Step-by-step guide" description="Read this guide first to get an overview of the upgrade process." link="/cms/migration/v4-to-v5/step-by-step" />
+<CustomDocCard emoji="2ï¸âƒ£" title="Upgrade tool reference" description="Learn more about how the upgrade tool can automatically migrate some parts of your Strapi v4 application to Strapi 5." link="/cms/upgrade-tool" />
+<CustomDocCard emoji="3ï¸âƒ£" title="Breaking changes list" description="Read more about the differences between Strapi v4 and v5, the resulting breaking changes, and how to handle them manually or with the help of the codemods provided with the upgrade tool." link="/cms/migration/v4-to-v5/breaking-changes" />
+<CustomDocCard emoji="4ï¸âƒ£" title="Specific resources" description="Handle specific use cases such as the deprecation of the Entity Service API in favor of the new Document Service API, the plugins migration, and the deprecation of the helper-plugin." link="/cms/migration/v4-to-v5/additional-resources/introduction" />
 
 ## Frequently asked questions
 
@@ -65,6 +65,27 @@ Strapi Cloud will deploy the updated code in Strapi 5 and will automatically run
 - REST responses continue to expose both `id` (legacy) and [`documentId`](/cms/migration/v4-to-v5/breaking-changes/use-document-id) when the header is enabled. GraphQL never exposes numeric `id`, so update your queries to use `documentId` even before you turn compatibility mode off.
 
 Once every consumer reads the flattened format, remove the header so Strapi emits the Strapi 5 response shape by default.
+<br/>
+
+</details>
+
+<details style={{backgroundColor: 'transparent', border: 'solid 1px #4945ff' }}>
+<summary style={{fontSize: '18px'}}>Why does the admin build fail with <code>Cannot find module &apos;react&apos;</code> while my project is still on Strapi v4?</summary>
+
+<p>Patch upgrades across Strapi v4 minors can fail the admin build with <code>Cannot find module &apos;react&apos;</code> (or similar). Newer v4 lines expect <code>react</code>, <code>react-dom</code>, <code>react-router-dom</code>, and <code>styled-components</code> to be listed explicitly in your app <code>package.json</code> instead of relying only on transitive resolution.</p>
+
+<p>Copy the versions from a fresh Strapi v4 project that matches your target release (for example run the official generator in a throwaway folder), then install and rebuild. A typical set looks like this:</p>
+
+```json
+"react": "^18.0.0",
+"react-dom": "^18.0.0",
+"react-router-dom": "5.3.4",
+"styled-components": "5.3.3"
+```
+
+<p>Using a tilde or caret range on <code>@strapi/strapi</code> (for example <code>~4.25.22</code>) is fine for patch updates; when you skip several minors, read the release notes and migration notes for each jump.</p>
+
+<p>The archived v4 Developer Documentation still lives on <ExternalLink to="https://docs-v4.strapi.io/dev-docs/migration-guides" text="docs-v4.strapi.io" />.</p>
 <br/>
 
 </details>
