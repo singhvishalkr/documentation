@@ -136,25 +136,6 @@ By default, most package managers enable hoisting, however, if it's not function
 - If you are using npm or pnpm: Add `hoist=true` to your project's `.npmrc` file. Learn more about this from the <ExternalLink to="https://pnpm.io/npmrc#hoist" text="official pnpm documentation"/>
 - If you are using Yarn: Set `nmHoistingLimits` in your `.yarnrc` file. More details can be found in the <ExternalLink to="https://yarnpkg.com/configuration/yarnrc#nmHoistingLimits" text="Yarn official documentation"/>
 
-## How to fix the build error `Cannot find module 'react'` when upgrading Strapi v4
-
-Patch upgrades across Strapi v4 minors can fail the admin build with `Cannot find module 'react'` (or similar). Newer v4 lines expect `react`, `react-dom`, `react-router-dom`, and `styled-components` to be listed explicitly in your app `package.json` instead of relying only on transitive resolution.
-
-Copy the versions from a fresh Strapi v4 project that matches your target release (for example `yarn create strapi-app` in a throwaway folder), then install and rebuild. A typical set looks like this:
-
-```json
-"react": "^18.0.0",
-"react-dom": "^18.0.0",
-"react-router-dom": "5.3.4",
-"styled-components": "5.3.3"
-```
-
-Using a tilde or caret range on `@strapi/strapi` (for example `~4.25.22`) is fine for patch updates; when you skip several minors, read the release notes and migration notes for each jump.
-
-:::note
-The archived v4 Developer Documentation still lives on <ExternalLink to="https://docs-v4.strapi.io/dev-docs/migration-guides" text="docs-v4.strapi.io"/>. This section is for teams who land on Strapi 5 docs while debugging a v4 upgrade.
-:::
-
 ## Is X feature available yet?
 
 You can see the <ExternalLink to="https://feedback.strapi.io/" text="public roadmap"/> to see which feature requests are currently being worked on and which have not been started yet, and to add new feature requests.
