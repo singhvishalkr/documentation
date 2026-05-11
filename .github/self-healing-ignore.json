@@ -144,6 +144,11 @@
       "number": 25416,
       "reason": "Router: Bug fix in admin fetch client's response handling (Safari error on 204 No Content). No public API or user-facing behavior change — entirely internal to admin UI error handling.",
       "added": "2026-05-09"
+    },
+    {
+      "number": 26049,
+      "reason": "Triage: performance optimization that skips expensive queries yielding identical results; no user-facing behavior, API, or feature changes",
+      "added": "2026-05-11"
     }
   ]
 }
