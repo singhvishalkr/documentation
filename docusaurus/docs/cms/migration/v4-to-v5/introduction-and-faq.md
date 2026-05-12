@@ -18,10 +18,10 @@ Whenever you feel ready to upgrade to Strapi 5, the present page will help you. 
 
 All of the following available resources will help you upgrade your application and plugins to Strapi 5, from the most common to the most specific use cases:
 
-<CustomDocCard emoji="1ï¸âƒ£" title="Step-by-step guide" description="Read this guide first to get an overview of the upgrade process." link="/cms/migration/v4-to-v5/step-by-step" />
-<CustomDocCard emoji="2ï¸âƒ£" title="Upgrade tool reference" description="Learn more about how the upgrade tool can automatically migrate some parts of your Strapi v4 application to Strapi 5." link="/cms/upgrade-tool" />
-<CustomDocCard emoji="3ï¸âƒ£" title="Breaking changes list" description="Read more about the differences between Strapi v4 and v5, the resulting breaking changes, and how to handle them manually or with the help of the codemods provided with the upgrade tool." link="/cms/migration/v4-to-v5/breaking-changes" />
-<CustomDocCard emoji="4ï¸âƒ£" title="Specific resources" description="Handle specific use cases such as the deprecation of the Entity Service API in favor of the new Document Service API, the plugins migration, and the deprecation of the helper-plugin." link="/cms/migration/v4-to-v5/additional-resources/introduction" />
+<CustomDocCard emoji="1️⃣" title="Step-by-step guide" description="Read this guide first to get an overview of the upgrade process." link="/cms/migration/v4-to-v5/step-by-step" />
+<CustomDocCard emoji="2️⃣" title="Upgrade tool reference" description="Learn more about how the upgrade tool can automatically migrate some parts of your Strapi v4 application to Strapi 5." link="/cms/upgrade-tool" />
+<CustomDocCard emoji="3️⃣" title="Breaking changes list" description="Read more about the differences between Strapi v4 and v5, the resulting breaking changes, and how to handle them manually or with the help of the codemods provided with the upgrade tool." link="/cms/migration/v4-to-v5/breaking-changes" />
+<CustomDocCard emoji="4️⃣" title="Specific resources" description="Handle specific use cases such as the deprecation of the Entity Service API in favor of the new Document Service API, the plugins migration, and the deprecation of the helper-plugin." link="/cms/migration/v4-to-v5/additional-resources/introduction" />
 
 ## Frequently asked questions
 
