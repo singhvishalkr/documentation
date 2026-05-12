@@ -149,6 +149,16 @@
       "number": 26049,
       "reason": "Triage: performance optimization that skips expensive queries yielding identical results; no user-facing behavior, API, or feature changes",
       "added": "2026-05-11"
+    },
+    {
+      "number": 24743,
+      "reason": "Triage: internal optimization to telemetry calls",
+      "added": "2026-05-12"
+    },
+    {
+      "number": 26032,
+      "reason": "Router: Internal database query builder fix. Adds a stable sort order to paginated selects to prevent duplicate/skipped rows, but this is an implementation detail of the query builder. No user-facing API or behavior change that requires documentation; developers don't interact with this change directly.",
+      "added": "2026-05-12"
     }
   ]
 }
