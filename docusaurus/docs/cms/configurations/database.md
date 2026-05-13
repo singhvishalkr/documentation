@@ -214,7 +214,7 @@ export default ({ env }) => {
 ```
 
 :::note
-AWS RDS IAM authentication requires SSL. Refer to the AWS documentation for the required certificate bundle and SSL parameters.
+AWS RDS IAM authentication requires SSL. Refer to the <ExternalLink to="https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/UsingWithRDS.IAMDBAuth.html" text="AWS documentation"/> for the required certificate bundle and SSL parameters.
 :::
 
 </TabItem>
