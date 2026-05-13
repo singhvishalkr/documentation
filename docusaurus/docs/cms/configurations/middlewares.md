@@ -746,7 +746,7 @@ The `public` middleware is a static file serving middleware, based on <ExternalL
 | `maxAge`       | Cache-control max-age directive, in milliseconds    | `Integer` | `60000`       |
 
 :::note
-Use the camelCase **`maxAge`** key in `config`, matching the table. Strapi 5 reads only this field from your `strapi::public` middleware `config` and passes it to `koa-static` (see `packages/core/core/src/middlewares/public.ts`); `defer` is fixed inside the core middleware, so you do not set it here.
+Use the camelCase `maxAge` key in `config`, matching the table. Strapi 5 reads only this field from your `strapi::public` middleware `config` and passes it to `koa-static` (see `packages/core/core/src/middlewares/public.ts`); `defer` is fixed inside the core middleware, so you do not set it here.
 :::
 
 :::tip
